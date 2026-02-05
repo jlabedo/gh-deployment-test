@@ -24,6 +24,9 @@ on:
         required: false
         type: string
 
+permissions:
+  deployments: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
