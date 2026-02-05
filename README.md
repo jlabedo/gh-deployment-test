@@ -1,5 +1,10 @@
 # GitHub Deployment Tracking Test
 
+[![Deploy Production](https://github.com/jlabedo/gh-deployment-test/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/jlabedo/gh-deployment-test/actions/workflows/deploy-production.yml)
+[![Deploy Staging](https://github.com/jlabedo/gh-deployment-test/actions/workflows/deploy-staging.yml/badge.svg)](https://github.com/jlabedo/gh-deployment-test/actions/workflows/deploy-staging.yml)
+[![Deploy Preview](https://github.com/jlabedo/gh-deployment-test/actions/workflows/deploy-preview.yml/badge.svg)](https://github.com/jlabedo/gh-deployment-test/actions/workflows/deploy-preview.yml)
+[![Manual Deployment](https://github.com/jlabedo/gh-deployment-test/actions/workflows/deploy-manual.yml/badge.svg)](https://github.com/jlabedo/gh-deployment-test/actions/workflows/deploy-manual.yml)
+
 Test repository for exploring [`bobheadxi/deployments`](https://github.com/bobheadxi/deployments) GitHub Action behavior across different deployment events.
 
 ## Workflows
