@@ -21,6 +21,7 @@ jobs:
           env: pr-${{ github.event.number }}
           ref: ${{ github.head_ref }}
           desc: "Preview deployment for PR #${{ github.event.number }}"
+          task: "deploy-preview"
 
       - name: Simulate preview deployment with progress updates
         env:
@@ -48,6 +49,22 @@ jobs:
           done
 
           echo "Preview ready!"
+
+      - name: Start deployment
+        uses: bobheadxi/deployments@v1
+        with:
+          step: start
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: "https://example.com/preview/pr-${{ github.event.number }}"
+          auto_inactive: true
+          task: "backfilling projection"
+
+      - name: Simulate deployment
+        run: |
+          echo "Deploying to production..."
+          sleep 60
+          echo "Deployment complete."
 
       - name: Finish deployment
         uses: bobheadxi/deployments@v1
