@@ -1,0 +1,16 @@
+name: Cleanup Preview
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deactivate preview environment
+        uses: bobheadxi/deployments@v1
+        with:
+          step: deactivate-env
+          env: pr-${{ github.event.number }}
+          desc: "Preview environment for PR #${{ github.event.number }} shut down"

@@ -1,0 +1,37 @@
+name: Deploy Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          env: pr-${{ github.event.number }}
+          ref: ${{ github.head_ref }}
+          desc: "Preview deployment for PR #${{ github.event.number }}"
+
+      - name: Simulate preview deployment
+        run: |
+          echo "Deploying preview for PR #${{ github.event.number }}..."
+          sleep 3
+          echo "Preview ready."
+
+      - name: Finish deployment
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: "https://example.com/preview/pr-${{ github.event.number }}"
+          auto_inactive: true
